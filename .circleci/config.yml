@@ -16,7 +16,7 @@ jobs:
       - persist_to_workspace:
           root : ~/
           paths: echo-output
-  print_output_file:
+  print-output-file:
     docker:
       - image: circleci/node:13.8.0
     steps:
