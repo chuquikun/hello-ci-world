@@ -2,25 +2,29 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-commands:
-  print_pipeline_id:
-    description: "Simple command to ilustrate command usage"
-    steps:
-      - run: echo ${CIRCLE_WORKFLOW_ID}
 
 jobs:
-  print-wf-id:
+  fail-on-purpose :
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - print_pipeline_id
+      - run: 
+          name: failing
+          command: return 1
+      
+      - run:
+          name: on fail
+          command: echo "There was an error so the execution of the pipeline was stopped"
+          when: on_fail
+
+  
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  show-wf-id:
+  fail-workflow:
     jobs:
-      - print-wf-id
+      - fail-on-purpose
 
 
 
