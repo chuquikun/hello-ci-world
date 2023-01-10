@@ -10,7 +10,7 @@ jobs:
     steps:
       - run: 
           name: failing
-          command: return 1
+          command: exit 1
       
       - run:
           name: on fail
