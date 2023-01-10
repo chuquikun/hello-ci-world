@@ -5,40 +5,19 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  print-hello:
+  save-hello-world-output:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
       - run:
-          name: "Say Hello only"
-          command: "echo Hello"
-  print-world:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - checkout
-      - run:
-          name: "Say CI/CD-World"
-          command: "echo ,CI/CD-World!"
-  print-pseudo:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - checkout
-      - run:
-          name: "Print my pseudoname"
-          command: "echo $MY_PSEUDO"
+          name: "Save greetings"
+          command: echo "Hello World" > output.txt
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  save-hello-workflow:
     jobs:
-      - print-hello
-      - print-world:
-          requires:
-            - print-hello
-  say-my-name:
-    jobs:
-      - print-pseudo
+      - save-hello-world-output
+
 
