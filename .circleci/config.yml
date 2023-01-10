@@ -40,4 +40,5 @@ workflows:
             - print-hello
   say-my-name:
     jobs:
+      - print-pseudo
 
